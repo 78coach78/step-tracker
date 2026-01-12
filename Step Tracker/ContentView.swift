@@ -9,13 +9,33 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            ScrollView{
+                VStack {
+                    VStack {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Label("Steps", systemImage: "figure.walk")
+                                    .font(.title3.bold())
+                                    .foregroundStyle(.pink)
+                                
+                                Text("Avg: 10k Steps")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .padding()
         }
-        .padding()
+            .padding()
+            .navigationTitle("Dashboard")
+        }
     }
 }
 
