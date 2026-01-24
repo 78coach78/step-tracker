@@ -89,8 +89,7 @@ struct DashboardView: View {
                 }
                 .padding()
                 .navigationTitle("Dashboard")
-                .navigationDestination(for: HealthMetricContext.self) {
-                    metric in Text(metric.title)
+                .navigationDestination(for: HealthMetricContext.self) {metric in HealthDataListView(metric: metric)
                 }
             }
         }
