@@ -39,32 +39,38 @@ struct HealthDataListView: View {
         NavigationStack {
             Form {
                 DatePicker("Date", selection: $adddDataDate, displayedComponents: .date)
-                TextField("Value", text: $valueToAdd)
+                HStack {
+                    Text(metric.title)
+                    Spacer()
+                    TextField("Value", text: $valueToAdd)
+                        .multilineTextAlignment(.trailing)
+                        .frame(width: 140)
+                        .keyboardType(metric == .steps ? .numberPad : .decimalPad)
+                }
             }
             .navigationTitle(metric.title)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add Data") {
-                        //Do later
+                       // Do later
                     }
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("dismiss") {
-                        //Do later
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("dismiss") {
+                            isShowingAddData = false
+                        }
+                        
                     }
-                    
                 }
-            }
-            
-           
-                }
+                
+                
             }
         }
-    
-#Preview {
-    NavigationStack {
-        HealthDataListView(metric: .steps)
     }
-}
+    
+    #Preview {
+        NavigationStack {
+            HealthDataListView(metric: .steps)
+        }
+    }
+
