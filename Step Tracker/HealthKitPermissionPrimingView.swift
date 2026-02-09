@@ -13,6 +13,7 @@ struct HealthKitPermissionPrimingView: View {
     @Environment(HealthKitManager.self) private var hKManager
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingHealthKitPermission = false
+    @Binding var hasSeen: Bool
     
     var description: String = """
 Allow Step Tracker to access your health data.
@@ -42,6 +43,8 @@ You can also add new step or weight to Apple Health from this app. Your data is 
            .tint(.pink)
         }
         .padding(30)
+        .interactiveDismissDisabled()
+        .onAppear { hasSeen = true }
         .healthDataAccessRequest(store: hKManager.store, shareTypes: hKManager.types,
                                  readTypes: hKManager.types,
                                  trigger: isShowingHealthKitPermission) { result in
@@ -60,6 +63,6 @@ You can also add new step or weight to Apple Health from this app. Your data is 
     }
 
 #Preview {
-    HealthKitPermissionPrimingView()
+    HealthKitPermissionPrimingView(hasSeen: .constant(true))
         .environment(HealthKitManager())
 }
