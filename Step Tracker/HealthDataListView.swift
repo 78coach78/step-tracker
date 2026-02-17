@@ -10,7 +10,6 @@ import SwiftUI
 struct HealthDataListView: View {
     
     @State private var isShowingAddData = false
-    
     @State private var adddDataDate: Date = .now
     @State private var valueToAdd: String = ""
     
@@ -24,7 +23,7 @@ struct HealthDataListView: View {
                 Text(10000, format: .number.precision(.fractionLength(metric == .steps ? 0 : 1)))
             }
         }
-        .navigationTitle(Text(metric.title))
+        .navigationTitle(metric.title)
         .sheet(isPresented: $isShowingAddData) {
             addDataView
         }
@@ -70,7 +69,7 @@ struct HealthDataListView: View {
     
     #Preview {
         NavigationStack {
-            HealthDataListView(metric: .steps)
+            HealthDataListView(metric: .weight)
         }
     }
 
