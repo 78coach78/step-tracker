@@ -15,6 +15,46 @@ import Observation
     
     let types: Set = [HKQuantityType(.stepCount), HKQuantityType(.bodyMass)]
     
+    func fetchStepCount() async {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        let EndDate = calendar.date(byAdding: .day, value: 1, to: today)!
+        let startDate = calendar.date(byAdding: .day, value: -28, to: EndDate)!
+        
+        let queryPredicate = HKQuery.predicateForSamples(withStart: startDate, end: EndDate)
+        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.stepCount), predicate: queryPredicate)
+        let stepsQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
+                                                               options: .cumulativeSum, anchorDate: EndDate, intervalComponents: .init(day: 1))
+        
+        
+       let stepCounts = try! await stepsQuery.result(for: store)
+        
+
+        }
+    }
+    
+    func fetchStepWeights() async {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        let EndDate = calendar.date(byAdding: .day, value: 1, to: today)!
+        let startDate = calendar.date(byAdding: .day, value: -28, to: EndDate)!
+        
+        let queryPredicate = HKQuery.predicateForSamples(withStart: startDate, end: EndDate)
+        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.bodyMass), predicate: queryPredicate)
+        let weightQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
+                                                               options: .mostRecent,
+                                                               anchorDate: EndDate,
+                                                               intervalComponents: .init(day: 1))
+        
+        
+        let weights = try! await weightQuery.result(for: store)
+        
+
+    }
+
+        // Use the statistics collection here.
+
+    
 //    func addSimulatorData() async {
 //        var mockSamples: [HKQuantitySample] = []
 //        
@@ -39,4 +79,4 @@ import Observation
 //        print("dummy Data sent up")
 //         
 //    }
-}
+
