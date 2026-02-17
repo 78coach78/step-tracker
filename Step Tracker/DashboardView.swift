@@ -25,7 +25,7 @@ struct DashboardView: View {
     
     @Environment(HealthKitManager.self) private var hkManager
     @AppStorage("hasSeenPermissionPriming") private var hasSeenPermissionPriming = false
-    @State private var isShowingPermissionPrimingSheet: Bool = false
+    @State private var isShowingPermissionPrimingSheet = false
     @State private var selectedStat: HealthMetricContext = .steps
     var isSteps: Bool { selectedStat == .steps }
     
@@ -38,7 +38,8 @@ struct DashboardView: View {
                             Text($0.title)
                         }
                     }
-                    .pickerStyle(SegmentedPickerStyle())
+                    .pickerStyle(.segmented)
+                    
                     VStack {
                         VStack {
                             NavigationLink(value: selectedStat){
