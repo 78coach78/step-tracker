@@ -31,8 +31,8 @@ struct DashboardView: View {
     var isSteps: Bool { selectedStat == .steps }
     
     var body: some View {
-        NavigationStack{
-            ScrollView{
+        NavigationStack {
+            ScrollView {
                 VStack(spacing: 20) {
                     Picker("Selected Stat", selection: $selectedStat) {
                         ForEach(HealthMetricContext.allCases) {
@@ -100,7 +100,7 @@ struct DashboardView: View {
                 }
                 .padding()
                 .task {
-//                    await hkManager.fetchStepCount()
+                    await hkManager.fetchStepCount()
                     isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
                 }
             }
@@ -110,7 +110,7 @@ struct DashboardView: View {
             .sheet(isPresented: $isShowingPermissionPrimingSheet, onDismiss: {
                 // fetch health data
             }, content: {
-//                HealthKitPermissionPrimingView(hasSeen: $hasSeenPermissionPriming)
+                HealthKitPermissionPrimingView(hasSeen: $hasSeenPermissionPriming)
             })
         }
         .tint(isSteps ? .pink : .indigo)
