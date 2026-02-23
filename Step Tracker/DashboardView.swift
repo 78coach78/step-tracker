@@ -54,102 +54,103 @@ struct DashboardView: View {
                     }
                     .pickerStyle(.segmented)
                     
+                    
                     VStack {
-                        VStack {
-                            NavigationLink(value: selectedStat){
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Label("Steps", systemImage: "figure.walk")
-                                            .font(.title3.bold())
-                                            .foregroundStyle(.pink)
-                                        
-                                        Text("Avg: \(Int(avgStepCount)) steps")
-                                            .font(.caption)
-                                    }
+                        NavigationLink(value: selectedStat){
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Label("Steps", systemImage: "figure.walk")
+                                        .font(.title3.bold())
+                                        .foregroundStyle(.pink)
                                     
-                                    Spacer()
-                                    
-                                    Image(systemName: "chevron.right")
+                                    Text("Avg: \(Int(avgStepCount))steps")
+                                        .font(.caption)
                                 }
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
                             }
-                            .foregroundStyle(.secondary)
-                            .padding(.bottom, 12)
-                            
-                            Chart {
-                                if let selectedHealthMetric {
-                                    RuleMark(x: .value("Selected Metric", selectedHealthMetric.date, unit: .day))
-                                        .offset(y: -10)
-                                        .annotation(position: .top,
-                                                    spacing: 0,
-                                                    overflowResolution: .init(x: .fit(to: .chart), y:
-                                                            .disabled)) {
-                                                                annotationView }
-                                }
-                                RuleMark(y: .value("Average", avgStepCount))
-                                    .foregroundStyle(Color.secondary)
-                                    .lineStyle(.init(lineWidth: 1, dash: [5]))
-                                ForEach(hkManager.stepData) { steps in
-                                    BarMark(
+                        }
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, 12)
+                        
+                        Chart {
+                            if let selectedHealthMetric {
+                                RuleMark(x: .value("Selected Metric", selectedHealthMetric.date, unit: .day))
+                                    .offset(y: -10)
+                                    .annotation(position: .top,
+                                                spacing: 0,
+                                                overflowResolution: .init(x: .fit(to: .chart), y:
+                                                        .disabled)) {
+                                                            annotationView
+                                                        }
+                            }
+                            RuleMark(y: .value("Average", avgStepCount))
+                                .foregroundStyle(Color.secondary)
+                                .lineStyle(.init(lineWidth: 1, dash: [5]))
+                            ForEach(hkManager.stepData) { steps in
+                                BarMark(
                                     x: .value("Date", steps.date, unit: .day),
                                     y: .value("Steps", steps.value)
-                                    )
-                                    .foregroundStyle(Color.pink.gradient)
-                                    .opacity(rawSelectedDate == nil || steps.date == selectedHealthMetric?.date ? 1.0 : 0.3)
-                                }
-                            }
-                            .frame(height: 150)
-                            .chartXSelection(value: $rawSelectedDate.animation(.easeInOut))
-                          
-                            .chartXAxis {
-                                AxisMarks {
-                                    AxisValueLabel(format: .dateTime.month(.defaultDigits).day())
-                                }
-                            }
-                                    
-                                    
-                            .chartYAxis {
-                                AxisMarks { value in
-                                    AxisGridLine()
-                                        .foregroundStyle(Color.secondary.opacity(0.3))
-                                    
-                                    AxisValueLabel((value.as(Double.self) ??
-                                                    0).formatted(.number.notation(.compactName)))
-                          
-                                }
-                               
+                                )
+                                .foregroundStyle(Color.pink.gradient)
+                                .opacity(rawSelectedDate == nil || steps.date == selectedHealthMetric?.date ? 1.0 : 0.3)
                             }
                         }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
+                        .frame(height: 150)
+                        .chartXSelection(value: $rawSelectedDate.animation(.easeInOut))
                         
-                        VStack(alignment: .leading) {
-                            VStack(alignment: .leading) {
-                                Label("Averiges", systemImage: "calendar")
-                                    .font(.title3.bold())
-                                    .foregroundStyle(.pink)
-                                
-                                Text("Last 28 Days")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                        .chartXAxis {
+                            AxisMarks {
+                                AxisValueLabel(format: .dateTime.month(.defaultDigits).day())
                             }
-                            .padding(.bottom, 12)
-                            
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundStyle(.secondary)
-                                .frame(height: 240)
+                        }
+                        
+                        
+                        .chartYAxis {
+                            AxisMarks { value in
+                                AxisGridLine()
+                                    .foregroundStyle(Color.secondary.opacity(0.3))
+                                
+                                AxisValueLabel((value.as(Double.self) ??
+                                                0).formatted(.number.notation(.compactName)))
+                                
+                            }
                             
                         }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
+                    
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            Label("Averiges", systemImage: "calendar")
+                                .font(.title3.bold())
+                                .foregroundStyle(.pink)
+                            
+                            Text("Last 28 Days")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(.bottom, 12)
+                        
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundStyle(.secondary)
+                            .frame(height: 240)
                         
                     }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
                     
                 }
-                .padding()
-                .task {
-                    await hkManager.fetchStepCount()
-                    isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
-                }
+                
+            }
+            .padding()
+            .task {
+                await hkManager.fetchStepCount()
+                isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
+                
             }
             .navigationTitle("Dashboard")
             .navigationDestination(for: HealthMetricContext.self) {metric in HealthDataListView(metric: metric)
@@ -165,9 +166,12 @@ struct DashboardView: View {
     
     var annotationView: some View {
         VStack(alignment: .leading) {
-            Text(selectedHealthMetric?.date ?? .now, format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())
-                .font(.footnote.bold())
-                .foregroundStyle(.secondary)
+            Text(selectedHealthMetric?.date ??
+                .now, format:
+                    .dateTime.weekday(.abbreviated).month(
+                        .abbreviated).day())
+            .font(.footnote.bold())
+            .foregroundStyle(.secondary)
             
             Text(selectedHealthMetric?.value ?? 0, format: .number.precision(.fractionLength(0)))
                 .fontWeight(.heavy)
