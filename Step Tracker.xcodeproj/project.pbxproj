@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5608B1352F4DAB2E002CEA35 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 5608B1342F4DAB2E002CEA35 /* Algorithms */; };
 		5674597C2F4D88180051BAB7 /* Step_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567459762F4D88180051BAB7 /* Step_TrackerApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5608B1352F4DAB2E002CEA35 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +75,7 @@
 			);
 			name = "Step Tracker";
 			packageProductDependencies = (
+				5608B1342F4DAB2E002CEA35 /* Algorithms */,
 			);
 			productName = "Step Tracker";
 			productReference = 56A192462F1588570087792C /* Step Tracker.app */;
@@ -102,6 +105,9 @@
 			);
 			mainGroup = 56A1923D2F1588570087792C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5608B1332F4DAB2E002CEA35 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 56A192472F1588570087792C /* Products */;
 			projectDirPath = "";
@@ -341,6 +347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5608B1332F4DAB2E002CEA35 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5608B1342F4DAB2E002CEA35 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5608B1332F4DAB2E002CEA35 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56A1923E2F1588570087792C /* Project object */;
 }
