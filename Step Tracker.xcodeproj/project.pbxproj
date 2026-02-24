@@ -6,7 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5674597C2F4D88180051BAB7 /* Step_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567459762F4D88180051BAB7 /* Step_TrackerApp.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		567459762F4D88180051BAB7 /* Step_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step_TrackerApp.swift; sourceTree = "<group>"; };
+		567459852F4D94C50051BAB7 /* Step Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Step Tracker.entitlements"; sourceTree = "<group>"; };
 		56A192462F1588570087792C /* Step Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Step Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -33,6 +39,8 @@
 			isa = PBXGroup;
 			children = (
 				56A192482F1588570087792C /* Step Tracker */,
+				567459852F4D94C50051BAB7 /* Step Tracker.entitlements */,
+				567459762F4D88180051BAB7 /* Step_TrackerApp.swift */,
 				56A192472F1588570087792C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,6 +127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5674597C2F4D88180051BAB7 /* Step_TrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
