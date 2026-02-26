@@ -26,12 +26,7 @@ struct ChartMath {
         for metric in sortedByWeekday {
             print("Day: \(metric.date.weekdayInt), value: \(metric.value)")
         }
-        
-        print("-----")
-        
-        for day in weekdayChartData {
-            print("Day: \(day.date.weekdayInt), value: \(day.value)")
-        }
+    
         return weekdayChartData
     }
 }
